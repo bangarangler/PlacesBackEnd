@@ -24,6 +24,7 @@ const getUsers = async (req, res, next) => {
 
   res.json({ users: users.map(user => user.toObject({ getters: true })) });
 };
+
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -31,7 +32,7 @@ const signup = async (req, res, next) => {
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const { name, email, password, places } = req.body;
+  const { name, email, password } = req.body;
 
   let existingUser;
   try {
@@ -52,7 +53,7 @@ const signup = async (req, res, next) => {
     image:
       "https://cdn.pixabay.com/photo/2015/07/09/00/29/woman-837156_1280.jpg",
     password,
-    places
+    places: []
   });
 
   try {
